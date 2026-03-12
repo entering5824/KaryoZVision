@@ -5,16 +5,27 @@ __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
+*.pyc
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+*.manifest
+*.spec
 
 env/
 venv/
 .venv/
 ENV/
+.env
+.env.local
+.env.*.local
 
 *.egg-info/
 *.egg
 dist/
 build/
+eggs/
+*.eggs
 
 ############################
 # IDE / Editor
@@ -22,12 +33,16 @@ build/
 .vscode/
 .idea/
 *.iml
+*.swp
+*.swo
+*~
 
 ############################
 # OS-specific
 ############################
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 ############################
 # Logs / Temp
@@ -35,28 +50,59 @@ Thumbs.db
 *.log
 *.tmp
 *.bak
+*.cache
 
 ############################
-# Project Data & Outputs
+# Project Data & Outputs (tránh commit file nặng)
 ############################
-# Dữ liệu thô & đã xử lý (rất nặng, không nên đẩy lên git)
-# Note: Cấu trúc folder data/1/, data/2/, ..., data/X/, data/Y/, data/unlabeled/ 
-# sẽ không được track, nhưng bạn có thể tạo folder trống với .gitkeep nếu cần
+# Dataset: thư mục dữ liệu (ảnh raw, preprocessed – rất nặng)
 data/
-src/data/
 
-# Model đã train (PCA, supervised, semi-supervised)
-# Các file này có thể tái tạo bằng cách chạy train.py
+# Model đã train (có thể tái tạo bằng train.py)
 models/
 *.pth
+*.pt
 *.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.onnx
 
-# Kết quả, hình ảnh, báo cáo sinh trong quá trình chạy
-# Có thể tái tạo bằng cách chạy train.py và evaluate.py
+# NumPy / array dumps (nặng)
+*.npy
+*.npz
+
+# Kết quả chạy pipeline (plots, CSV, JSON sinh ra)
 results/
+*.csv
+!**/requirements*.csv
 
 ############################
 # Jupyter / Notebook
 ############################
 .ipynb_checkpoints/
+*.ipynb_checkpoints
+
+############################
+# Testing / Linting / Coverage
+############################
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+
+############################
+# Archives (tránh tải file nén nặng)
+############################
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
 

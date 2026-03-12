@@ -1,0 +1,695 @@
+{
+  "filename": "9250900340.035.K",
+  "chromosomes": [
+    {
+      "chromosome": "1",
+      "centroid": {
+        "x": 167.275499092559,
+        "y": 235.37059891107077
+      },
+      "bounding_box": {
+        "x": 155,
+        "y": 145,
+        "width": 28,
+        "height": 179
+      },
+      "area": 2755,
+      "is_split": false
+    },
+    {
+      "chromosome": "1",
+      "centroid": {
+        "x": 214.36458696409898,
+        "y": 242.55977692575811
+      },
+      "bounding_box": {
+        "x": 183,
+        "y": 163,
+        "width": 65,
+        "height": 161
+      },
+      "area": 2869,
+      "is_split": false
+    },
+    {
+      "chromosome": "2",
+      "centroid": {
+        "x": 298.5023454157783,
+        "y": 235.62217484008528
+      },
+      "bounding_box": {
+        "x": 282,
+        "y": 158,
+        "width": 32,
+        "height": 157
+      },
+      "area": 2345,
+      "is_split": false
+    },
+    {
+      "chromosome": "2",
+      "centroid": {
+        "x": 343.61673221308547,
+        "y": 267.8923846978906
+      },
+      "bounding_box": {
+        "x": 317,
+        "y": 221,
+        "width": 53,
+        "height": 94
+      },
+      "area": 2797,
+      "is_split": false
+    },
+    {
+      "chromosome": "3",
+      "centroid": {
+        "x": 434.59073170731705,
+        "y": 248.17268292682928
+      },
+      "bounding_box": {
+        "x": 424,
+        "y": 175,
+        "width": 24,
+        "height": 149
+      },
+      "area": 2050,
+      "is_split": false
+    },
+    {
+      "chromosome": "3",
+      "centroid": {
+        "x": 473.4488888888889,
+        "y": 248.648
+      },
+      "bounding_box": {
+        "x": 459,
+        "y": 175,
+        "width": 30,
+        "height": 149
+      },
+      "area": 2250,
+      "is_split": false
+    },
+    {
+      "chromosome": "4",
+      "centroid": {
+        "x": 668.3599590373784,
+        "y": 265.7747055811572
+      },
+      "bounding_box": {
+        "x": 643,
+        "y": 228,
+        "width": 44,
+        "height": 96
+      },
+      "area": 1953,
+      "is_split": false
+    },
+    {
+      "chromosome": "4",
+      "centroid": {
+        "x": 721.4282352941176,
+        "y": 274.04470588235296
+      },
+      "bounding_box": {
+        "x": 696,
+        "y": 228,
+        "width": 47,
+        "height": 89
+      },
+      "area": 1700,
+      "is_split": false
+    },
+    {
+      "chromosome": "5",
+      "centroid": {
+        "x": 803.9342337052261,
+        "y": 256.03229594832646
+      },
+      "bounding_box": {
+        "x": 791,
+        "y": 198,
+        "width": 25,
+        "height": 118
+      },
+      "area": 1703,
+      "is_split": false
+    },
+    {
+      "chromosome": "5",
+      "centroid": {
+        "x": 832.4638492871691,
+        "y": 256.4348268839104
+      },
+      "bounding_box": {
+        "x": 820,
+        "y": 195,
+        "width": 25,
+        "height": 129
+      },
+      "area": 1964,
+      "is_split": false
+    },
+    {
+      "chromosome": "6",
+      "centroid": {
+        "x": 183.70284387695878,
+        "y": 421.6686012768427
+      },
+      "bounding_box": {
+        "x": 173,
+        "y": 362,
+        "width": 26,
+        "height": 117
+      },
+      "area": 1723,
+      "is_split": false
+    },
+    {
+      "chromosome": "6",
+      "centroid": {
+        "x": 211.6377789309808,
+        "y": 417.8147379346134
+      },
+      "bounding_box": {
+        "x": 200,
+        "y": 349,
+        "width": 25,
+        "height": 130
+      },
+      "area": 1927,
+      "is_split": false
+    },
+    {
+      "chromosome": "7",
+      "centroid": {
+        "x": 285.0,
+        "y": 417.0
+      },
+      "bounding_box": {
+        "x": 272,
+        "y": 356,
+        "width": 27,
+        "height": 123
+      },
+      "area": 2285,
+      "is_split": true
+    },
+    {
+      "chromosome": "7",
+      "centroid": {
+        "x": 313.0,
+        "y": 417.0
+      },
+      "bounding_box": {
+        "x": 299,
+        "y": 356,
+        "width": 28,
+        "height": 123
+      },
+      "area": 2285,
+      "is_split": true
+    },
+    {
+      "chromosome": "8",
+      "centroid": {
+        "x": 392.0,
+        "y": 427.0
+      },
+      "bounding_box": {
+        "x": 379,
+        "y": 376,
+        "width": 27,
+        "height": 103
+      },
+      "area": 2315,
+      "is_split": true
+    },
+    {
+      "chromosome": "8",
+      "centroid": {
+        "x": 419.0,
+        "y": 427.0
+      },
+      "bounding_box": {
+        "x": 406,
+        "y": 376,
+        "width": 27,
+        "height": 103
+      },
+      "area": 2315,
+      "is_split": true
+    },
+    {
+      "chromosome": "9",
+      "centroid": {
+        "x": 492.1638772663877,
+        "y": 428.8835425383543
+      },
+      "bounding_box": {
+        "x": 479,
+        "y": 387,
+        "width": 26,
+        "height": 92
+      },
+      "area": 1434,
+      "is_split": false
+    },
+    {
+      "chromosome": "9",
+      "centroid": {
+        "x": 524.550185873606,
+        "y": 422.9695167286245
+      },
+      "bounding_box": {
+        "x": 514,
+        "y": 384,
+        "width": 24,
+        "height": 83
+      },
+      "area": 1345,
+      "is_split": false
+    },
+    {
+      "chromosome": "10",
+      "centroid": {
+        "x": 603.0,
+        "y": 426.0
+      },
+      "bounding_box": {
+        "x": 589,
+        "y": 373,
+        "width": 28,
+        "height": 106
+      },
+      "area": 2010,
+      "is_split": true
+    },
+    {
+      "chromosome": "10",
+      "centroid": {
+        "x": 631.0,
+        "y": 426.0
+      },
+      "bounding_box": {
+        "x": 617,
+        "y": 373,
+        "width": 29,
+        "height": 106
+      },
+      "area": 2010,
+      "is_split": true
+    },
+    {
+      "chromosome": "11",
+      "centroid": {
+        "x": 701.0,
+        "y": 434.0
+      },
+      "bounding_box": {
+        "x": 682,
+        "y": 389,
+        "width": 38,
+        "height": 90
+      },
+      "area": 1828,
+      "is_split": true
+    },
+    {
+      "chromosome": "11",
+      "centroid": {
+        "x": 739.0,
+        "y": 434.0
+      },
+      "bounding_box": {
+        "x": 720,
+        "y": 389,
+        "width": 39,
+        "height": 90
+      },
+      "area": 1828,
+      "is_split": true
+    },
+    {
+      "chromosome": "12",
+      "centroid": {
+        "x": 819.0,
+        "y": 426.0
+      },
+      "bounding_box": {
+        "x": 808,
+        "y": 374,
+        "width": 22,
+        "height": 105
+      },
+      "area": 1960,
+      "is_split": true
+    },
+    {
+      "chromosome": "12",
+      "centroid": {
+        "x": 841.0,
+        "y": 426.0
+      },
+      "bounding_box": {
+        "x": 830,
+        "y": 374,
+        "width": 22,
+        "height": 105
+      },
+      "area": 1960,
+      "is_split": true
+    },
+    {
+      "chromosome": "13",
+      "centroid": {
+        "x": 182.0,
+        "y": 554.0
+      },
+      "bounding_box": {
+        "x": 171,
+        "y": 517,
+        "width": 23,
+        "height": 75
+      },
+      "area": 1174,
+      "is_split": true
+    },
+    {
+      "chromosome": "13",
+      "centroid": {
+        "x": 206.0,
+        "y": 554.0
+      },
+      "bounding_box": {
+        "x": 194,
+        "y": 517,
+        "width": 24,
+        "height": 75
+      },
+      "area": 1174,
+      "is_split": true
+    },
+    {
+      "chromosome": "14",
+      "centroid": {
+        "x": 284.594050743657,
+        "y": 562.2099737532808
+      },
+      "bounding_box": {
+        "x": 267,
+        "y": 531,
+        "width": 33,
+        "height": 61
+      },
+      "area": 1143,
+      "is_split": false
+    },
+    {
+      "chromosome": "14",
+      "centroid": {
+        "x": 318.86939417781275,
+        "y": 546.7678992918961
+      },
+      "bounding_box": {
+        "x": 307,
+        "y": 508,
+        "width": 24,
+        "height": 84
+      },
+      "area": 1271,
+      "is_split": false
+    },
+    {
+      "chromosome": "15",
+      "centroid": {
+        "x": 392.0,
+        "y": 551.0
+      },
+      "bounding_box": {
+        "x": 379,
+        "y": 510,
+        "width": 27,
+        "height": 82
+      },
+      "area": 1402,
+      "is_split": true
+    },
+    {
+      "chromosome": "15",
+      "centroid": {
+        "x": 420.0,
+        "y": 551.0
+      },
+      "bounding_box": {
+        "x": 406,
+        "y": 510,
+        "width": 28,
+        "height": 82
+      },
+      "area": 1402,
+      "is_split": true
+    },
+    {
+      "chromosome": "16",
+      "centroid": {
+        "x": 603.5816993464052,
+        "y": 553.4300653594771
+      },
+      "bounding_box": {
+        "x": 595,
+        "y": 527,
+        "width": 19,
+        "height": 55
+      },
+      "area": 765,
+      "is_split": false
+    },
+    {
+      "chromosome": "16",
+      "centroid": {
+        "x": 629.9538106235566,
+        "y": 551.7794457274827
+      },
+      "bounding_box": {
+        "x": 621,
+        "y": 522,
+        "width": 19,
+        "height": 59
+      },
+      "area": 866,
+      "is_split": false
+    },
+    {
+      "chromosome": "17",
+      "centroid": {
+        "x": 705.9337278106509,
+        "y": 556.5846153846154
+      },
+      "bounding_box": {
+        "x": 695,
+        "y": 528,
+        "width": 23,
+        "height": 64
+      },
+      "area": 845,
+      "is_split": false
+    },
+    {
+      "chromosome": "17",
+      "centroid": {
+        "x": 736.7397107897664,
+        "y": 557.7942157953281
+      },
+      "bounding_box": {
+        "x": 724,
+        "y": 528,
+        "width": 25,
+        "height": 64
+      },
+      "area": 899,
+      "is_split": false
+    },
+    {
+      "chromosome": "18",
+      "centroid": {
+        "x": 816.3394123606889,
+        "y": 559.9918946301925
+      },
+      "bounding_box": {
+        "x": 796,
+        "y": 536,
+        "width": 36,
+        "height": 56
+      },
+      "area": 987,
+      "is_split": false
+    },
+    {
+      "chromosome": "18",
+      "centroid": {
+        "x": 850.6652763295099,
+        "y": 560.3003128258603
+      },
+      "bounding_box": {
+        "x": 840,
+        "y": 533,
+        "width": 24,
+        "height": 59
+      },
+      "area": 959,
+      "is_split": false
+    },
+    {
+      "chromosome": "19",
+      "centroid": {
+        "x": 172.25666666666666,
+        "y": 697.3366666666667
+      },
+      "bounding_box": {
+        "x": 162,
+        "y": 673,
+        "width": 19,
+        "height": 48
+      },
+      "area": 600,
+      "is_split": false
+    },
+    {
+      "chromosome": "19",
+      "centroid": {
+        "x": 203.35690235690237,
+        "y": 698.543771043771
+      },
+      "bounding_box": {
+        "x": 190,
+        "y": 680,
+        "width": 27,
+        "height": 39
+      },
+      "area": 594,
+      "is_split": false
+    },
+    {
+      "chromosome": "20",
+      "centroid": {
+        "x": 283.63845050215207,
+        "y": 704.3127690100431
+      },
+      "bounding_box": {
+        "x": 271,
+        "y": 685,
+        "width": 27,
+        "height": 37
+      },
+      "area": 697,
+      "is_split": false
+    },
+    {
+      "chromosome": "20",
+      "centroid": {
+        "x": 312.4141104294479,
+        "y": 697.1932515337423
+      },
+      "bounding_box": {
+        "x": 303,
+        "y": 674,
+        "width": 21,
+        "height": 47
+      },
+      "area": 652,
+      "is_split": false
+    },
+    {
+      "chromosome": "21",
+      "centroid": {
+        "x": 443.9593495934959,
+        "y": 705.4281842818428
+      },
+      "bounding_box": {
+        "x": 435,
+        "y": 690,
+        "width": 18,
+        "height": 28
+      },
+      "area": 369,
+      "is_split": false
+    },
+    {
+      "chromosome": "21",
+      "centroid": {
+        "x": 467.2847533632287,
+        "y": 705.322869955157
+      },
+      "bounding_box": {
+        "x": 458,
+        "y": 689,
+        "width": 19,
+        "height": 33
+      },
+      "area": 446,
+      "is_split": false
+    },
+    {
+      "chromosome": "22",
+      "centroid": {
+        "x": 548.4904458598726,
+        "y": 699.9490445859873
+      },
+      "bounding_box": {
+        "x": 542,
+        "y": 681,
+        "width": 15,
+        "height": 39
+      },
+      "area": 471,
+      "is_split": false
+    },
+    {
+      "chromosome": "22",
+      "centroid": {
+        "x": 573.3706176961603,
+        "y": 693.2454090150251
+      },
+      "bounding_box": {
+        "x": 564,
+        "y": 673,
+        "width": 21,
+        "height": 43
+      },
+      "area": 599,
+      "is_split": false
+    },
+    {
+      "chromosome": "X",
+      "centroid": {
+        "x": 705.095168374817,
+        "y": 678.0161054172768
+      },
+      "bounding_box": {
+        "x": 696,
+        "y": 634,
+        "width": 21,
+        "height": 88
+      },
+      "area": 1366,
+      "is_split": false
+    },
+    {
+      "chromosome": "Y",
+      "centroid": {
+        "x": 732.4119047619048,
+        "y": 670.7
+      },
+      "bounding_box": {
+        "x": 720,
+        "y": 620,
+        "width": 27,
+        "height": 103
+      },
+      "area": 1680,
+      "is_split": false
+    }
+  ]
+}

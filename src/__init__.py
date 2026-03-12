@@ -8,7 +8,7 @@ Main package for chromosome classification using semi-supervised learning.
 from . import config
 
 # Import main modules
-from . import data
+from . import datasets
 from . import features
 from . import models
 from . import training
@@ -18,7 +18,7 @@ from . import utils
 
 __all__ = [
     'config',
-    'data',
+    'datasets',
     'features',
     'models',
     'training',

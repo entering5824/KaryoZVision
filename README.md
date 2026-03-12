@@ -1,220 +1,256 @@
-# Semi-Supervised Chromosome Classification
+# Chromosome Classification
 
-Dự án phân loại nhiễm sắc thể sử dụng mô hình học máy bán giám sát (Semi-Supervised Learning) để tự động phân loại các nhiễm sắc thể theo 23 loại (1-22, X, Y).
+**Semi-supervised chromosome classification (classes 1–22, X, Y)** using PCA and blob-based features. Pipeline for training and inference from src/ or scripts/; scikit-learn, OpenCV.
 
-## Tổng quan
+---
 
-Dự án này xây dựng một pipeline hoàn chỉnh cho:
-1. **Trích xuất đặc trưng**: Blob features (morphological) + PCA từ ảnh nhiễm sắc thể
-2. **Huấn luyện bán giám sát**: Self-training với pseudo-labeling
-3. **Đánh giá**: Metrics và visualizations
-4. **Inference**: Phân loại tự động cho ảnh chưa gán nhãn
+## Problem Statement
 
-## Cấu trúc Project
+- **Real-world problem**: Cytogenetics labs need to identify and group chromosomes (1–22, X, Y) from microscopy images. Manual sorting is time-consuming; semi-supervised or feature-based methods can assist when labeled data is limited.
+- **Why it matters**: Supports karyotyping and genetic diagnosis; PCA and blob features provide interpretable, low-dimensional representation.
+- **Constraints**: Image data and possible limited labels; feature extraction (blob, shape) and PCA; users are researchers or lab technicians.
+
+---
+
+## System Architecture
 
 ```
-Final_ComputerVision/
-├── data/
-│   ├── 1/                    # D_L: Ảnh nhiễm sắc thể loại 1 (đã gán nhãn)
-│   ├── 2/                    # D_L: Ảnh nhiễm sắc thể loại 2
-│   ├── ...                   # D_L: Các loại 3-22
-│   ├── 22/                   # D_L: Ảnh nhiễm sắc thể loại 22
-│   ├── X/                    # D_L: Ảnh nhiễm sắc thể X
-│   ├── Y/                    # D_L: Ảnh nhiễm sắc thể Y
-│   ├── unlabeled/            # D_U: Ảnh nhiễm sắc thể chưa gán nhãn (từ metaphase spread)
-│   └── json/                 # Metadata (không dùng trong training)
-├── src/
-│   ├── data/                 # Data loading và splitting
-│   ├── features/             # Feature extraction (blob, PCA, augmentation)
-│   ├── models/               # Model definitions (MLP)
-│   ├── training/             # Training logic (supervised, semi-supervised)
-│   ├── evaluation/           # Metrics, calibration, visualization
-│   ├── inference/            # Inference pipeline
-│   └── utils/                # Logging, model utilities
+Raw karyotype sheet images
+    → Preprocessing pipeline (`src/preprocessing/`, unified via `src/pipeline.py`)
+    → Cropped chromosome images (folders 1–22, X, Y)
+    → Feature extraction / PCA
+    → Classifier (e.g. sklearn / semi-supervised)
+    → Class label (1–22, X, Y)
+```
+
+- **No web/API by default**: Run training and inference from src/ or scripts/ as needed.
+- **Stack**: Python, scikit-learn, OpenCV; data and models on disk.
+
+---
+
+## Key Features
+
+### AI Features
+
+- **Feature extraction**: Blob and shape features from chromosome images (OpenCV).
+- **Dimensionality reduction**: PCA for compact representation.
+- **Model**: Semi-supervised or supervised classifier (see src/ or scripts/) for 24 classes (1–22, X, Y).
+- **Evaluation**: Accuracy or per-class metrics (implement in training script).
+
+### Application Features
+
+- **CLI/scripts**: Training and inference as per project scripts; no built-in UI.
+
+### Engineering Features
+
+- **Modular**: src/ or scripts/ for pipeline steps; requirements.txt for deps.
+
+---
+
+## Model & Methodology
+
+- **Features**: Blob and shape descriptors (OpenCV); PCA for reduction.
+- **Algorithm**: Classifier (e.g. SVM, Random Forest, or semi-supervised method) on feature vector.
+- **Evaluation**: Accuracy, per-class precision/recall (run training to generate).
+
+---
+
+## Results
+
+Dataset: 42,722 chromosome images (24 classes: 1–22, X, Y)
+
+| Model              | Accuracy | F1 (weighted) | F1 (macro) |
+|--------------------|----------|---------------|------------|
+| Supervised         | 89.90%   | 89.92%        | 89.29%     |
+| Semi-supervised    | 89.44%   | 89.43%        | —          |
+
+The supervised model slightly outperforms the semi-supervised approach by ~0.5%.
+
+### Evaluation outputs (after running `scripts/evaluate.py`)
+
+Generated under `results/`:
+
+- **Confusion matrix**: `confusion_matrix_supervised.png`, `confusion_matrix_semi_supervised.png`
+- **Per-class performance**: `per_class_performance_supervised.png`, `per_class_performance_semi_supervised.png`
+- **Training curves**: `training_curves.png` (from `train.py`)
+- **PCA variance**: `pca_variance.png`
+- **Metrics**: `comparison.json`
+
+Example placement in docs: you can add a `results/examples/` folder and commit sample plots for the README, e.g.:
+
+| Confusion matrix (supervised) | Per-class performance (supervised) |
+|-------------------------------|------------------------------------|
+| ![Confusion matrix](results/examples/confusion_matrix_supervised.png) | ![Per-class](results/examples/per_class_performance_supervised.png) |
+
+*(Create `results/examples/` and copy the PNGs there if you want these images in the repo; `results/` is gitignored by default.)*
+
+---
+
+## Project Structure
+
+```
+chromosome-classification/
+├── data/                    # Training data: 1–22, X, Y, unlabeled/
+├── models/                  # Saved PCA + classifier weights
+├── results/                 # Plots, metrics, evaluation artifacts
 ├── scripts/
-│   ├── train.py              # Main training script
-│   ├── evaluate.py           # Evaluation script
-│   └── infer.py              # Inference script
-├── models/                   # Saved models (PCA, supervised, semi-supervised)
-├── results/                  # Results và visualizations
-├── topic.md                  # Yêu cầu chi tiết của đề bài
-└── requirements.txt          # Python dependencies
+│   ├── train.py             # Training entrypoint
+│   ├── evaluate.py          # Evaluation entrypoint
+│   └── infer.py             # Inference on new images
+├── src/
+│   ├── config.py            # Global paths + hyperparameters
+│   ├── pipeline.py          # Unified preprocessing wrapper (from raw sheets → cropped chromosomes)
+│   ├── preprocessing/       # Ported from `cv-karyotype-preprocessing`
+│   │   ├── part1_preproc.py
+│   │   ├── part2_blobs.py
+│   │   ├── part3_map_and_crop.py
+│   │   ├── blob_processing_utils.py
+│   │   ├── preprocessing_utils.py
+│   │   ├── utils.py
+│   │   └── config.py
+│   ├── datasets/            # Dataset utilities for classification
+│   ├── features/            # Feature extraction (blob, PCA, etc.)
+│   ├── models/              # Model definitions
+│   ├── training/            # Training loop / semi-supervised logic
+│   ├── evaluation/          # Evaluation helpers
+│   ├── inference/           # Inference helpers
+│   └── utils/               # Shared utilities
+├── requirements.txt
+└── README.md
 ```
 
-## Yêu cầu
+---
 
-### Dependencies
+## Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Các thư viện chính:
-- `torch` - PyTorch cho neural networks
-- `numpy`, `scipy` - Tính toán số học
-- `scikit-learn` - PCA, metrics
-- `scikit-image` - Image processing
-- `opencv-python` - Image I/O và processing
-- `matplotlib`, `seaborn` - Visualizations
-- `pandas` - Data handling
+Typical: scikit-learn, OpenCV, numpy, pandas. Prepare chromosome image data as expected by the pipeline.
 
-## Cách sử dụng
+---
 
-### 1. Chuẩn bị dữ liệu
+## Usage
 
-Đảm bảo dữ liệu được tổ chức như sau:
+### 1. Preprocess raw karyotype sheets (from former `cv-karyotype-preprocessing`)
 
-**D_L (Labeled Data - Dữ liệu đã gán nhãn):**
-- Các folder `data/1/`, `data/2/`, ..., `data/22/`, `data/X/`, `data/Y/` chứa ảnh nhiễm sắc thể đã được cắt và gán nhãn tự động từ Bài tập Giữa kỳ
-- Mỗi folder chứa các file ảnh (`.jpg`, `.png`) của nhiễm sắc thể tương ứng
+```bash
+# Option A: one-command wrapper
+python scripts/run_pipeline.py
 
-**D_U (Unlabeled Data - Dữ liệu chưa gán nhãn):**
-- Folder `data/unlabeled/` chứa tập hợp lớn các ảnh nhiễm sắc thể được trích xuất từ các quang cảnh tế bào chất (metaphase spread) chưa được sắp xếp
-- Nếu folder `data/unlabeled/` chưa tồn tại hoặc rỗng, script sẽ tự động tạo unlabeled data từ một phần training set để demo (không khuyến nghị cho production)
+# Option B: more control via module CLI
+python -m src.pipeline --input data/raw --out data/preprocessed
+```
 
-**Lưu ý:** Theo yêu cầu đề bài (`topic.md`), D_U phải là tập hợp lớn hơn các ảnh chưa được sắp xếp từ metaphase spread. Nên chuẩn bị folder `data/unlabeled/` với dữ liệu thực tế trước khi training.
+This will:
 
-### 2. Training
+- Run segmentation, blob extraction, and grid mapping from the old project.
+- Produce cropped chromosome images grouped into subfolders (1–22, X, Y) under `data/preprocessed/` (or a custom `--out`).
 
-Chạy pipeline training hoàn chỉnh (supervised + semi-supervised):
+### 2. Train chromosome classifier
+
+Move/link the cropped chromosome folders from `data/preprocessed/` vào `data/` đúng cấu trúc (xem bên dưới), rồi chạy:
 
 ```bash
 python scripts/train.py
 ```
 
-Pipeline sẽ:
-1. **Load D_L**: Load ảnh từ các folder `1/`, `2/`, ..., `22/`, `X/`, `Y/` trong `data/`
-2. **Split D_L**: Chia thành train/val/test (70/15/15) với stratified sampling
-3. **Load D_U**: Load ảnh chưa gán nhãn từ `data/unlabeled/` (nếu có)
-4. **Trích xuất features**: Blob features (morphological) + PCA từ flattened image vectors
-5. **Supervised baseline**: Train mô hình ban đầu trên D_L (50 epochs)
-6. **Semi-supervised self-training**: 
-   - Predict trên D_U với confidence scores
-   - Chọn high-confidence samples làm pseudo-labels
-   - Thêm vào training set và retrain
-   - Lặp lại cho đến khi đạt **≥300 epochs tổng cộng** (yêu cầu đề bài)
-7. **Lưu kết quả**: Models, training curves, PCA variance plot
-
-### 3. Evaluation
-
-Đánh giá models trên test set:
+### 3. Evaluate / infer
 
 ```bash
 python scripts/evaluate.py
 ```
 
-Script sẽ:
-- Load trained models
-- Evaluate trên test set
-- Generate confusion matrices, per-class metrics
-- So sánh supervised vs semi-supervised
-
-### 4. Inference
-
-Phân loại ảnh chưa gán nhãn:
+**Single-image inference (demo):**
 
 ```bash
-python scripts/infer.py
+python scripts/infer.py --image sample.png
 ```
 
-Script sẽ:
-- Load model và PCA
-- Predict cho tất cả ảnh trong `data/unlabeled/`
-- Lưu kết quả vào `results/predictions.csv`
+Example output:
 
-## Cấu hình
+```text
+================================================================================
+CHROMOSOME CLASSIFICATION - INFERENCE
+================================================================================
 
-Chỉnh sửa `src/config.py` để thay đổi:
-- Data paths
-- Model architecture (hidden_dims)
-- Training parameters (learning_rate, batch_size, epochs)
-- Semi-supervised parameters (confidence_thresholds, top_k_per_class)
-- Feature options (extended features, texture, histogram)
+Loading trained model and feature extractor...
 
-## Pipeline chi tiết
+Chromosome 7 (confidence 0.91)
+```
 
-### Feature Extraction
+**Batch inference** (directory of images):
 
-1. **Blob Features**: Morphological properties (Area, Perimeter, Aspect Ratio, Compactness, Eccentricity, Hu moments, etc.)
-2. **Texture Features**: LBP (Local Binary Pattern), GLCM (Gray-Level Co-occurrence Matrix)
-3. **Histogram Features**: Mean, Std, Skewness, Kurtosis, Percentiles
-4. **PCA**: Dimensionality reduction trên flattened image vectors
+```bash
+python scripts/infer.py --dir data/unlabeled --output results/predictions.csv
+```
 
-### Model Architecture
+---
 
-- **MLP**: Multi-Layer Perceptron (theo yêu cầu đề bài)
-  - Input: PCA features (k=128 hoặc giữ ≥95% variance) + scaled blob features (concatenated)
-  - Hidden layers: [512, 256, 128] (theo plan trong `topic.md`)
-  - Activation: LeakyReLU
-  - Output: 23 classes (softmax) - tương ứng với 1-22, X, Y
-  - Regularization: Dropout (0.3), Weight decay (1e-4), BatchNorm (optional)
+## Dataset structure
 
-### Semi-Supervised Learning
+Recommended layout for data used in this project:
 
-**Self-Training với Pseudo-Labeling**:
-1. Train supervised baseline trên D_L
-2. Predict trên D_U với confidence scores
-3. Select high-confidence samples (threshold T_conf)
-4. Apply top-K per class để tránh class imbalance
-5. Add pseudo-labels vào training set
-6. Retrain và lặp lại
+```text
+data/
+ ├── raw/
+ │    └── karyotype_sheets...           # ảnh tấm karyotype gốc
+ │
+ ├── preprocessed/
+ │    └── (tự động tạo bởi preprocessing)
+ │         ├── 1/
+ │         ├── 2/
+ │         ├── ...
+ │         ├── X/
+ │         └── Y/
+ │
+ ├── unlabeled/                         # (optional) ảnh chưa gán nhãn cho semi-supervised
+ │    └── *.png / *.jpg
+ │
+ └── (optional) train/                  # nếu muốn tách riêng so với preprocessed
+      ├── 1/
+      ├── 2/
+      ├── ...
+      ├── X/
+      └── Y/
+```
 
-**Safety mechanisms**:
-- Pseudo-labels không bao giờ thay thế labeled data gốc
-- Top-K filtering để duy trì class balance
-- Early stopping trong mỗi iteration
-- Tổng epochs ≥ 300 (yêu cầu đề bài)
+By default, `src.config` dùng `data/` làm thư mục chứa các lớp 1–22, X, Y; bạn có thể:
 
-## Kết quả
+- Dùng trực tiếp `data/preprocessed/` làm `data/`, hoặc
+- Copy/symlink từ `data/preprocessed/` sang `data/` trước khi chạy `train.py`.
 
-Sau khi chạy training và evaluation, kết quả được lưu trong:
-- `models/`: Trained models
-- `results/`: Metrics, confusion matrices, training curves
-- `results/predictions.csv`: Predictions cho unlabeled data
+---
 
-## Phân công công việc
+## Demo
 
-Project được chia thành các module độc lập để làm việc nhóm:
+Run `python scripts/infer.py --image sample.png` to see a single-image prediction (e.g. `Chromosome 7 (confidence 0.91)`). See **Results** above for accuracy and **Evaluation outputs** for generated plots.
 
-1. **Data & Features**: `src/data/`, `src/features/`
-2. **Models & Training**: `src/models/`, `src/training/`
-3. **Evaluation & Reporting**: `src/evaluation/`
-4. **Integration**: `scripts/`, `src/inference/`
+---
 
-Xem chi tiết trong plan file.
+## Deployment
 
-## Yêu cầu theo đề bài (topic.md)
+- **Local/research**: Run on workstation or server; add REST API (e.g. FastAPI) if serving is needed.
 
-Dự án này thực hiện đúng theo yêu cầu trong `topic.md`:
+---
 
-1. **Dữ liệu đầu vào:**
-   - D_L: Tập dữ liệu giám sát từ các folder 1-22, X, Y (đã gán nhãn tự động từ Bài tập Giữa kỳ)
-   - D_U: Tập hợp lớn hơn các ảnh nhiễm sắc thể chưa được sắp xếp (từ metaphase spread)
+## Future Improvements
 
-2. **Mô hình và huấn luyện:**
-   - Mô hình học máy bán giám sát (Semi-Supervised Learning)
-   - Phân chia tập dữ liệu: 70% train / 15% val / 15% test
-   - **Tối thiểu 300 epochs** (hoặc vòng lặp huấn luyện)
-   - Self-training với pseudo-labeling
+- **CNN baseline**: ResNet18 or MobileNetV2 for comparison with classical ML (feature + PCA + MLP). *Future work: CNN baseline (ResNet18) for comparison with classical ML.*
+- Full pipeline script (single command from raw images to labels).
+- Export to standard karyotype format or report.
 
-3. **Trích xuất đặc trưng:**
-   - Blob features: Morphological properties (Area, Perimeter, Aspect Ratio, Eccentricity, Hu moments, ...)
-   - PCA: Giảm chiều từ flattened image vectors, giữ ≥95% variance hoặc k=128 components
-   - Kết hợp: PCA features + morphological features
+---
 
-4. **Kỹ thuật bán giám sát:**
-   - Supervised initialization (50 epochs)
-   - Self-training loop với confidence threshold (T_conf) annealing từ 0.98 → 0.85
-   - Top-K per class để tránh class imbalance
-   - Tổng epochs ≥ 300
+## For your CV / portfolio
 
-## Notes
+Short bullet you can use (e.g. for AI internship applications):
 
-- Model sử dụng **MLP với features + PCA** (theo yêu cầu đề bài, không dùng pretrained deep learning models)
-- **Đảm bảo ≥300 epochs total** trong quá trình training (yêu cầu bắt buộc)
-- PCA được fit **chỉ trên training set** để tránh data leakage
-- Pseudo-labels không bao giờ thay thế labeled data gốc
+**Chromosome Classification (Computer Vision)**
 
-## License
-
-Educational project for Computer Vision course.
+- Built an end-to-end pipeline for chromosome classification (24 classes: 1–22, X, Y) from microscopy images.
+- Implemented preprocessing and segmentation using OpenCV blob detection.
+- Extracted shape-based features and applied PCA for dimensionality reduction.
+- Trained supervised and semi-supervised classifiers using PyTorch/scikit-learn.
+- Achieved **89.9% accuracy** on a 42k-image dataset.

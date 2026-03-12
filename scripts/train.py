@@ -13,8 +13,8 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.data.loader import load_labeled_data, load_unlabeled_data
-from src.data.splitter import split_data, create_unlabeled_data
+from src.datasets.loader import load_labeled_data, load_unlabeled_data
+from src.datasets.splitter import split_data, create_unlabeled_data
 from src.features.pca import FeatureExtractor
 from src.training.supervised import train_supervised
 from src.training.semi_supervised import self_training_loop
