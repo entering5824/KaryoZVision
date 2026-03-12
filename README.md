@@ -242,15 +242,3 @@ Run `python scripts/infer.py --image sample.png` to see a single-image predictio
 - Export to standard karyotype format or report.
 
 ---
-
-## For your CV / portfolio
-
-Short bullet you can use (e.g. for AI internship applications):
-
-**Chromosome Classification (Computer Vision)**
-
-- Built an end-to-end pipeline for chromosome classification (24 classes: 1–22, X, Y) from microscopy images.
-- Implemented preprocessing and segmentation using OpenCV blob detection.
-- Extracted shape-based features and applied PCA for dimensionality reduction.
-- Trained supervised and semi-supervised classifiers using PyTorch/scikit-learn.
-- Achieved **89.9% accuracy** on a 42k-image dataset.
